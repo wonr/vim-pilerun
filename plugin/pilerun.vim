@@ -1,19 +1,17 @@
 " vim-pilerun
 " Author: wonr
 
-" Open input file in a vertical split
-autocmd FileType c,cpp,python,javascript noremap <leader>e <ESC>:vs %:r.in<CR>:wa<CR>
 
-" Compile and run
-function! CompileAndRun(compiler, target, version, flag, input, run)
-  execute '!'.a:compiler.' '.a:target.' '.a:version.' '.a:flag.' && '
-        \ .a:input.' '.a:run
-endfunction
-
-" Run
-function! Run(input, run)
-  execute '!'.a:input.' '.a:run
-endfunction
+"-------------------------------------------------------------------------------
+" Configuration
+"-------------------------------------------------------------------------------
+" Keybind
+if !exists('g:input_keybind')
+  let g:input_keybind = '<leader>e'
+endif
+if !exists('g:execute_keybind')
+  let g:execute_keybind = '<leader>w'
+endif
 
 " With input or not
 if !exists('g:c_with_input')
@@ -30,7 +28,34 @@ if !exists('g:nodejs_with_input')
 endif
 
 
+"-------------------------------------------------------------------------------
+" Function
+"-------------------------------------------------------------------------------
+" Open input file
+function! OpenInputFile(input_keybind)
+  execute 'nnoremap '.a:input_keybind.' <ESC>:vs %:r.in<CR>:wa<CR>'
+endfunction
+
+" Compile and run
+function! CompileAndRun(compiler, target, version, flag, input, run)
+  execute '!'.a:compiler.' '.a:target.' '.a:version.' '.a:flag.' && '
+        \ .a:input.' '.a:run
+endfunction
+
+" Run
+function! Run(input, run)
+  execute '!'.a:input.' '.a:run
+endfunction
+
+
 " FileType settings
+"-------------------------------------------------------------------------------
+" Input
+"-------------------------------------------------------------------------------
+" Open input file in a vertical split
+autocmd FileType c,cpp,python,javascript :call OpenInputFile(g:input_keybind)
+
+
 "-------------------------------------------------------------------------------
 " C
 "-------------------------------------------------------------------------------
@@ -56,9 +81,12 @@ endif
 
 let g:c_run = './%:r'
 
-autocmd FileType c
-      \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ CompileAndRun(g:c_compiler, g:c_target, g:c_version, g:c_flag, g:c_input, g:c_run)<CR>
+autocmd FileType c execute 'call CExecute(g:execute_keybind)'
+
+function! CExecute(execute_keybind)
+  execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
+        \ CompileAndRun(g:c_compiler, g:c_target, g:c_version, g:c_flag, g:c_input, g:c_run)<CR>'
+endfunction
 
 
 "-------------------------------------------------------------------------------
@@ -86,9 +114,12 @@ endif
 
 let g:cpp_run = './%:r'
 
-autocmd FileType cpp
-      \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:cpp_version, g:cpp_flag, g:cpp_input, g:cpp_run)<CR>
+autocmd FileType cpp execute 'call CppExecute(g:execute_keybind)'
+
+function! CppExecute(execute_keybind)
+  execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
+        \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:cpp_version, g:cpp_flag, g:cpp_input, g:cpp_run)<CR>'
+endfunction
 
 
 "-------------------------------------------------------------------------------
@@ -102,9 +133,12 @@ endif
 
 let g:py3_run = 'python3 %'
 
-autocmd FileType python
-      \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ Run(g:py3_input, g:py3_run)<CR>
+autocmd FileType python execute 'call PyExecute(g:execute_keybind)'
+
+function! PyExecute(execute_keybind)
+  execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
+        \ Run(g:py3_input, g:py3_run)<CR>'
+endfunction
 
 
 "-------------------------------------------------------------------------------
@@ -118,9 +152,12 @@ endif
 
 let g:nodejs_run = 'node %'
 
-autocmd FileType javascript
-      \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ Run(g:nodejs_input, g:nodejs_run)<CR>
+autocmd FileType javascript execute 'call NodejsExecute(g:execute_keybind)'
+
+function! NodejsExecute(execute_keybind)
+  execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
+        \ Run(g:nodejs_input, g:nodejs_run)<CR>'
+endfunction
 
 
 "-------------------------------------------------------------------------------
