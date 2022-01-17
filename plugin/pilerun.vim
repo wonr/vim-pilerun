@@ -7,13 +7,27 @@ autocmd FileType c,cpp,python,javascript noremap <leader>e <ESC>:vs %:r.in<CR>:w
 " Compile and run
 function! CompileAndRun(compiler, target, version, flags, input, run)
   execute '!'.a:compiler.' '.a:target.' '.a:version.' '.a:flags.' && '
-        \ .a:input.' | '.a:run
+        \ .a:input.' '.a:run
 endfunction
 
 " Run
 function! Run(input, run)
-  execute '!'.a:input.' | '.a:run
+  execute '!'.a:input.' '.a:run
 endfunction
+
+" With input or not
+if !exists('g:c_with_input')
+  let g:c_with_input = 1
+endif
+if !exists('g:cpp_with_input')
+  let g:cpp_with_input = 1
+endif
+if !exists('g:py3_with_input')
+  let g:py3_with_input = 1
+endif
+if !exists('g:nodejs_with_input')
+  let g:nodejs_with_input = 1
+endif
 
 
 " FileType settings
@@ -34,7 +48,12 @@ if !exists('g:c_flags')
   let g:c_flags = '-g -O2 -Wall'
 endif
 
-let g:c_input = 'cat %:r.in'
+if g:c_with_input
+  let g:c_input = 'cat %:r.in |'
+else
+  let g:c_input = ''
+endif
+
 let g:c_run = './%:r'
 
 autocmd FileType c
@@ -59,18 +78,28 @@ if !exists('g:cpp_flags')
   let g:cpp_flags = '-g -O2 -Wall'
 endif
 
-let g:cpp_input = 'cat %:r.in'
+if g:cpp_with_input
+  let g:cpp_input = 'cat %:r.in |'
+else
+  let g:cpp_input = ''
+endif
+
 let g:cpp_run = './%:r'
 
 autocmd FileType cpp
       \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:c_version, g:cpp_flags, g:cpp_input, g:cpp_run)<CR>
+      \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:cpp_version, g:cpp_flags, g:cpp_input, g:cpp_run)<CR>
 
 
 "-------------------------------------------------------------------------------
 " Python3
 "-------------------------------------------------------------------------------
-let g:py3_input = 'cat %:r.in'
+if g:py3_with_input
+  let g:py3_input = 'cat %:r.in |'
+else
+  let g:py3_input = ''
+endif
+
 let g:py3_run = 'python3 %'
 
 autocmd FileType python
@@ -81,7 +110,12 @@ autocmd FileType python
 "-------------------------------------------------------------------------------
 " Node.js
 "-------------------------------------------------------------------------------
-let g:nodejs_input = 'cat %:r.in'
+if g:nodejs_with_input
+  let g:nodejs_input = 'cat %:r.in |'
+else
+  let g:nodejs_input = ''
+endif
+
 let g:nodejs_run = 'node %'
 
 autocmd FileType javascript
