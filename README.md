@@ -10,7 +10,7 @@ vim-pilerun support C, C++ for now.
 
 Compilers are not included. Compiler must be installed on your system.
 
-Install via plugin manager like ```[Vim-Plug](https://github.com/junegunn/vim-plug)```
+Install via plugin manager like [Vim-Plug](https://github.com/junegunn/vim-plug)
 
 ```vim
 Plug 'wonr/vim-pilerun'
