@@ -5,8 +5,8 @@
 autocmd FileType c,cpp,python,javascript noremap <leader>e <ESC>:vs %:r.in<CR>:wa<CR>
 
 " Compile and run
-function! CompileAndRun(compiler, target, version, flags, input, run)
-  execute '!'.a:compiler.' '.a:target.' '.a:version.' '.a:flags.' && '
+function! CompileAndRun(compiler, target, version, flag, input, run)
+  execute '!'.a:compiler.' '.a:target.' '.a:version.' '.a:flag.' && '
         \ .a:input.' '.a:run
 endfunction
 
@@ -44,8 +44,8 @@ if !exists('g:c_version')
   let g:c_version = '-std=c11'
 endif
 
-if !exists('g:c_flags')
-  let g:c_flags = '-g -O2 -Wall'
+if !exists('g:c_flag')
+  let g:c_flag = '-g -O2 -Wall'
 endif
 
 if g:c_with_input
@@ -58,7 +58,7 @@ let g:c_run = './%:r'
 
 autocmd FileType c
       \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ CompileAndRun(g:c_compiler, g:c_target, g:c_version, g:c_flags, g:c_input, g:c_run)<CR>
+      \ CompileAndRun(g:c_compiler, g:c_target, g:c_version, g:c_flag, g:c_input, g:c_run)<CR>
 
 
 "-------------------------------------------------------------------------------
@@ -74,8 +74,8 @@ if !exists('g:cpp_version')
   let g:cpp_version = '-std=c++20'
 endif
 
-if !exists('g:cpp_flags')
-  let g:cpp_flags = '-g -O2 -Wall'
+if !exists('g:cpp_flag')
+  let g:cpp_flag = '-g -O2 -Wall'
 endif
 
 if g:cpp_with_input
@@ -88,7 +88,7 @@ let g:cpp_run = './%:r'
 
 autocmd FileType cpp
       \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:cpp_version, g:cpp_flags, g:cpp_input, g:cpp_run)<CR>
+      \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:cpp_version, g:cpp_flag, g:cpp_input, g:cpp_run)<CR>
 
 
 "-------------------------------------------------------------------------------
