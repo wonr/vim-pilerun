@@ -18,7 +18,7 @@ Install via plugin manager like [Vim-Plug](https://github.com/junegunn/vim-plug)
 Plug 'wonr/vim-pilerun'
 ```
 
-### Post Installation
+### Post installation
 
 Put the following option into your ```vimrc``` file.
 
@@ -36,20 +36,45 @@ let mapleader = '\'
 
 ## Usage
 
-### Keybinding
+### Default key binding
 
 Use following commands in ```normal mode``` of Vim.
 
-```vim
-<leader>e  " Open input file in a vertical split
-```
+* Open input file in a vertical split
 
 ```vim
-<leader>w  " Compile and run
+<leader>e
+```
+
+* Compile and run
+
+```vim
+<leader>w
 ```
 
 
 ## Configuration
+
+### Key binding
+
+If you want to change key bindings, you need to set the following options in your ```vimrc``` file.
+
+* Open input file in a vertical split
+
+```vim
+" Default is '<leader>e'
+" Example:
+let g:input_keybind = '<F4>'
+```
+
+* Compile and run
+
+```vim
+" Default is '<leader>w'
+" Example:
+let g:execute_keybind = '<F5>'
+```
+
 
 ### Input from a file
 
