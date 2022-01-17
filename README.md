@@ -4,7 +4,7 @@ You can compile and run your code easily.
 
 vim-pilerun is good choice for problem solvers, competitive programmers and the people who prepare job interviews.
 
-vim-pilerun support C, C++ for now.
+vim-pilerun support C, C++, Python3, Node.js for now.
 
 ## Installation
 

@@ -2,12 +2,17 @@
 " Author: wonr
 
 " Open input file in a vertical split
-autocmd FileType c,cpp noremap <leader>e <ESC>:vs %:r.in<CR>:wa<CR>
+autocmd FileType c,cpp,python,javascript noremap <leader>e <ESC>:vs %:r.in<CR>:wa<CR>
 
 " Compile and run
 function! CompileAndRun(compiler, target, version, flags, input, run)
   execute '!'.a:compiler.' '.a:target.' '.a:version.' '.a:flags.' && '
         \ .a:input.' | '.a:run
+endfunction
+
+" Run
+function! Run(input, run)
+  execute '!'.a:input.' | '.a:run
 endfunction
 
 
@@ -60,6 +65,28 @@ let g:cpp_run = './%:r'
 autocmd FileType cpp
       \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
       \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:c_version, g:cpp_flags, g:cpp_input, g:cpp_run)<CR>
+
+
+"-------------------------------------------------------------------------------
+" Python3
+"-------------------------------------------------------------------------------
+let g:py3_input = 'cat %:r.in'
+let g:py3_run = 'python3 %'
+
+autocmd FileType python
+      \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
+      \ Run(g:py3_input, g:py3_run)<CR>
+
+
+"-------------------------------------------------------------------------------
+" Node.js
+"-------------------------------------------------------------------------------
+let g:nodejs_input = 'cat %:r.in'
+let g:nodejs_run = 'node %'
+
+autocmd FileType javascript
+      \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
+      \ Run(g:nodejs_input, g:nodejs_run)<CR>
 
 
 "-------------------------------------------------------------------------------
