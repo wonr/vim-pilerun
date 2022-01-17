@@ -1,27 +1,32 @@
 " vim-pilerun
 " Author: wonr
 
-" Edit input file in a vertical split
+" Open input file in a vertical split
 autocmd FileType c,cpp noremap <leader>e <ESC>:vs %:r.in<CR>:wa<CR>
 
 " Compile and run
-function! CompileAndRun(compiler, target, flags, input, run)
-  execute '!'.a:compiler.' '.a:target.' '.a:flags.' && '.a:input.' | '.a:run
+function! CompileAndRun(compiler, target, version, flags, input, run)
+  execute '!'.a:compiler.' '.a:target.' '.a:version.' '.a:flags.' && '
+        \ .a:input.' | '.a:run
 endfunction
 
 
-" FileTypes
+" FileType settings
 "-------------------------------------------------------------------------------
 " C
 "-------------------------------------------------------------------------------
 if !exists('g:c_compiler')
-  let g:c_compiler = 'clang'
+  let g:c_compiler = 'gcc'
 endif
 
 let g:c_target = '-o %:r %'
 
+if !exists('g:c_version')
+  let g:c_version = '-std=c11'
+endif
+
 if !exists('g:c_flags')
-  let g:c_flags = '-std=c11 -g -O2 -Wall'
+  let g:c_flags = '-g -O2 -Wall'
 endif
 
 let g:c_input = 'cat %:r.in'
@@ -29,18 +34,24 @@ let g:c_run = './%:r'
 
 autocmd FileType c
       \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ CompileAndRun(g:c_compiler, g:c_target, g:c_flags, g:c_input, g:c_run)<CR>
+      \ CompileAndRun(g:c_compiler, g:c_target, g:c_version, g:c_flags, g:c_input, g:c_run)<CR>
+
+
 "-------------------------------------------------------------------------------
 " C++
 "-------------------------------------------------------------------------------
 if !exists('g:cpp_compiler')
-  let g:cpp_compiler = 'clang++'
+  let g:cpp_compiler = 'g++'
 endif
 
 let g:cpp_target = '-o %:r %'
 
+if !exists('g:cpp_version')
+  let g:cpp_version = '-std=c++20'
+endif
+
 if !exists('g:cpp_flags')
-  let g:cpp_flags = '-std=c++17 -g -O2 -Wall'
+  let g:cpp_flags = '-g -O2 -Wall'
 endif
 
 let g:cpp_input = 'cat %:r.in'
@@ -48,7 +59,9 @@ let g:cpp_run = './%:r'
 
 autocmd FileType cpp
       \ noremap <leader>w <ESC>:!clear <ESC>:w <bar>:call
-      \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:cpp_flags, g:cpp_input, g:cpp_run)<CR>
+      \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:c_version, g:cpp_flags, g:cpp_input, g:cpp_run)<CR>
+
+
 "-------------------------------------------------------------------------------
 " END
 "-------------------------------------------------------------------------------
