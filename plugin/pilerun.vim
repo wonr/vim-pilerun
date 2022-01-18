@@ -43,8 +43,8 @@ function! CompileAndRun(compiler, target, version, flag, input, run)
 endfunction
 
 " Run
-function! Run(input, run)
-  execute '!'.a:input.' '.a:run
+function! Run(input, compiler, target)
+  execute '!'.a:input.' '.a:compiler.' '.a:target
 endfunction
 
 
@@ -131,13 +131,17 @@ else
   let g:py3_input = ''
 endif
 
-let g:py3_run = 'python3 %'
+if !exists('g:py3_compiler')
+  let g:py3_compiler = 'python3'
+endif
+
+let g:py3_target = '%'
 
 autocmd FileType python execute 'call PyExecute(g:execute_keybind)'
 
 function! PyExecute(execute_keybind)
   execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
-        \ Run(g:py3_input, g:py3_run)<CR>'
+        \ Run(g:py3_input, g:py3_compiler, g:py3_target)<CR>'
 endfunction
 
 
@@ -150,13 +154,15 @@ else
   let g:nodejs_input = ''
 endif
 
-let g:nodejs_run = 'node %'
+let g:nodejs_compiler = 'node'
+
+let g:nodejs_target = '%'
 
 autocmd FileType javascript execute 'call NodejsExecute(g:execute_keybind)'
 
 function! NodejsExecute(execute_keybind)
   execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
-        \ Run(g:nodejs_input, g:nodejs_run)<CR>'
+        \ Run(g:nodejs_input, g:nodejs_compiler, g:nodejs_target)<CR>'
 endfunction
 
 
