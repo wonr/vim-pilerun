@@ -2,7 +2,7 @@
 
 ![vim-pilerun](https://user-images.githubusercontent.com/59398632/149714564-f32ca216-6c25-4614-96e2-a560e3572b37.gif)
 
-vim-pilerun is a vim plugin that helps you can compile and run code easily.
+vim-pilerun is a vim plugin that helps you can compile and run a single file source code easily.
 
 It's a good choice for problem solvers, competitive programmers and the people who prepare for a job interview.
 
@@ -26,13 +26,6 @@ Put the following option into your ```vimrc``` file.
 filetype plugin on
 ```
 
-You can set ```<leader>``` key in your ```vimrc``` file.
-
-```vim
-" Example:
-let mapleader = '\'
-```
-
 
 ## Usage
 
@@ -52,6 +45,13 @@ Use following commands in ```normal mode``` of Vim.
 <leader>w
 ```
 
+You can set ```<leader>``` key in your ```vimrc``` file.
+
+```vim
+" Example:
+let mapleader = '\'
+```
+
 
 ## Configuration
 
@@ -59,7 +59,7 @@ Use following commands in ```normal mode``` of Vim.
 
 If you want to change key bindings, you need to set the following options in your ```vimrc``` file.
 
-* Open input file in a vertical split
+* Open an input file in a vertical split
 
 ```vim
 " Default is '<leader>e'
@@ -97,15 +97,24 @@ By default, C/C++ compiler is set to ```gcc```. But if you want to use ```Clang`
 * C
 
 ```vim
-" Default is gcc
+" Default is 'gcc'
 let g:c_compiler = 'clang'
 ```
 
 * C++
 
 ```vim
-" Default is g++
+" Default is 'g++'
 let g:cpp_compiler = 'clang++'
+```
+
+* Python3
+
+If you want to use ```PyPy```, you need to set the following option in your ```vimrc``` file.
+
+```vim
+" Default is 'python3'
+let g:py3_compiler = 'pypy3'
 ```
 
 
