@@ -8,6 +8,7 @@ It's a good choice for problem solvers, competitive programmers and the people w
 
 vim-pilerun support C, C++, Python3, Node.js for now.
 
+
 ## Installation
 
 Compilers are not included. Compiler must be installed on your system.
@@ -17,6 +18,15 @@ Install via plugin manager like [Vim-Plug](https://github.com/junegunn/vim-plug)
 ```vim
 Plug 'wonr/vim-pilerun'
 ```
+
+Install via Vim's built-in package manager
+
+```sh
+mkdir -p ~/.vim/pack/wonr/start
+cd ~/.vim/pack/wonr/start
+git clone https://github.com/wonr/vim-pilerun.git
+```
+
 
 ### Post installation
 
@@ -28,6 +38,7 @@ filetype plugin on
 
 
 ## Usage
+
 
 ### Default key binding
 
@@ -54,6 +65,7 @@ let mapleader = '\'
 
 
 ## Configuration
+
 
 ### Key binding
 
