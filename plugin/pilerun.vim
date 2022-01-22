@@ -1,6 +1,7 @@
-" vim-pilerun
+" File: plugin/pilerun.vim
+" Description: A single file source code runner for Vim.
 " Author: wonr
-
+" License: MIT
 
 "-------------------------------------------------------------------------------
 " Configuration
