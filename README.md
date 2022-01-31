@@ -67,7 +67,7 @@ let mapleader = '\'
 ## Configuration
 
 
-### Key binding
+### 1. Key binding
 
 If you want to change key bindings, you need to set the following options in your ```vimrc``` file.
 
@@ -88,7 +88,7 @@ let g:execute_keybind = '<F5>'
 ```
 
 
-### Input from a file
+### 2. Input from a file
 
 If you don't want to get an input from a file, you need to set one of the following options in your ```vimrc``` file.
 
@@ -102,7 +102,17 @@ let g:nodejs_with_input = 0  " Node.js
 ```
 
 
-### Compiler
+### 3. Terminal window clearing
+
+If you don't want to clear the terminal window before run, you need to set the following option in your ```vimrc``` file.
+
+```vim
+" Default is 1
+let g:clear_term = 0
+```
+
+
+### 4. Compiler
 
 By default, C/C++ compiler is set to ```gcc```. But if you want to use ```Clang```, you need to set the following option in your ```vimrc``` file.
 
@@ -130,7 +140,7 @@ let g:py3_compiler = 'pypy3'
 ```
 
 
-### Language version
+### 5. Language version
 
 By default, C is set to ```C11``` and C++ is set to ```C++20```. But if you want to use another version, you need to set the following option in your ```vimrc``` file.
 
@@ -153,7 +163,7 @@ let g:cpp_version = '-std=c++17'
 ```
 
 
-### Compile flag
+### 6. Compile flag
 
 You can also edit compile flags. There are so many warning, optimize, debugging flags that a compiler provides.
 
