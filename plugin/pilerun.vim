@@ -14,6 +14,16 @@ if !exists('g:execute_keybind')
   let g:execute_keybind = '<leader>w'
 endif
 
+" Clear terminal or not
+if !exists('g:clear_term')
+  let g:clear_term = 1
+endif
+if g:clear_term
+  let s:clear = '<ESC>:!clear'
+else
+  let s:clear = ''
+endif
+
 " With input or not
 if !exists('g:c_with_input')
   let g:c_with_input = 1
@@ -64,7 +74,7 @@ if !exists('g:c_compiler')
   let g:c_compiler = 'gcc'
 endif
 
-let g:c_target = '-o %:r %'
+let b:c_target = '-o %:r %'
 
 if !exists('g:c_version')
   let g:c_version = '-std=c11'
@@ -75,18 +85,18 @@ if !exists('g:c_flag')
 endif
 
 if g:c_with_input
-  let g:c_input = 'cat %:r.in |'
+  let b:c_input = 'cat %:r.in |'
 else
-  let g:c_input = ''
+  let b:c_input = ''
 endif
 
-let g:c_run = './%:r'
+let b:c_run = './%:r'
 
-autocmd FileType c execute 'call CExecute(g:execute_keybind)'
+autocmd FileType c execute 'call CExecute(g:execute_keybind, s:clear)'
 
-function! CExecute(execute_keybind)
-  execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
-        \ CompileAndRun(g:c_compiler, g:c_target, g:c_version, g:c_flag, g:c_input, g:c_run)<CR>'
+function! CExecute(execute_keybind, clear)
+  execute 'nnoremap '.a:execute_keybind.' '.a:clear.' <ESC>:w <bar>:call
+        \ CompileAndRun(g:c_compiler, b:c_target, g:c_version, g:c_flag, b:c_input, b:c_run)<CR>'
 endfunction
 
 
@@ -97,7 +107,7 @@ if !exists('g:cpp_compiler')
   let g:cpp_compiler = 'g++'
 endif
 
-let g:cpp_target = '-o %:r %'
+let b:cpp_target = '-o %:r %'
 
 if !exists('g:cpp_version')
   let g:cpp_version = '-std=c++20'
@@ -108,18 +118,18 @@ if !exists('g:cpp_flag')
 endif
 
 if g:cpp_with_input
-  let g:cpp_input = 'cat %:r.in |'
+  let b:cpp_input = 'cat %:r.in |'
 else
-  let g:cpp_input = ''
+  let b:cpp_input = ''
 endif
 
-let g:cpp_run = './%:r'
+let b:cpp_run = './%:r'
 
-autocmd FileType cpp execute 'call CppExecute(g:execute_keybind)'
+autocmd FileType cpp execute 'call CppExecute(g:execute_keybind, s:clear)'
 
-function! CppExecute(execute_keybind)
-  execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
-        \ CompileAndRun(g:cpp_compiler, g:cpp_target, g:cpp_version, g:cpp_flag, g:cpp_input, g:cpp_run)<CR>'
+function! CppExecute(execute_keybind, clear)
+  execute 'nnoremap '.a:execute_keybind.' '.a:clear.' <ESC>:w <bar>:call
+        \ CompileAndRun(g:cpp_compiler, b:cpp_target, g:cpp_version, g:cpp_flag, b:cpp_input, b:cpp_run)<CR>'
 endfunction
 
 
@@ -127,22 +137,22 @@ endfunction
 " Python3
 "-------------------------------------------------------------------------------
 if g:py3_with_input
-  let g:py3_input = 'cat %:r.in |'
+  let b:py3_input = 'cat %:r.in |'
 else
-  let g:py3_input = ''
+  let b:py3_input = ''
 endif
 
 if !exists('g:py3_compiler')
   let g:py3_compiler = 'python3'
 endif
 
-let g:py3_target = '%'
+let b:py3_target = '%'
 
-autocmd FileType python execute 'call PyExecute(g:execute_keybind)'
+autocmd FileType python execute 'call PyExecute(g:execute_keybind, s:clear)'
 
-function! PyExecute(execute_keybind)
-  execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
-        \ Run(g:py3_input, g:py3_compiler, g:py3_target)<CR>'
+function! PyExecute(execute_keybind, clear)
+  execute 'nnoremap '.a:execute_keybind.' '.a:clear.' <ESC>:w <bar>:call
+        \ Run(b:py3_input, g:py3_compiler, b:py3_target)<CR>'
 endfunction
 
 
@@ -150,20 +160,20 @@ endfunction
 " Node.js
 "-------------------------------------------------------------------------------
 if g:nodejs_with_input
-  let g:nodejs_input = 'cat %:r.in |'
+  let b:nodejs_input = 'cat %:r.in |'
 else
-  let g:nodejs_input = ''
+  let b:nodejs_input = ''
 endif
 
-let g:nodejs_compiler = 'node'
+let b:nodejs_compiler = 'node'
 
-let g:nodejs_target = '%'
+let b:nodejs_target = '%'
 
-autocmd FileType javascript execute 'call NodejsExecute(g:execute_keybind)'
+autocmd FileType javascript execute 'call NodejsExecute(g:execute_keybind, s:clear)'
 
-function! NodejsExecute(execute_keybind)
-  execute 'nnoremap '.a:execute_keybind.' <ESC>:!clear <ESC>:w <bar>:call
-        \ Run(g:nodejs_input, g:nodejs_compiler, g:nodejs_target)<CR>'
+function! NodejsExecute(execute_keybind, clear)
+  execute 'nnoremap '.a:execute_keybind.' '.a:clear.' <ESC>:w <bar>:call
+        \ Run(b:nodejs_input, b:nodejs_compiler, b:nodejs_target)<CR>'
 endfunction
 
 
