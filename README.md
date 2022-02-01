@@ -53,7 +53,7 @@ Use following commands in ```normal mode``` of Vim.
 * Compile and run
 
 ```vim
-<leader>w
+<leader>b
 ```
 
 You can set ```<leader>``` key in your ```vimrc``` file.
@@ -82,7 +82,7 @@ let g:input_keybind = '<F4>'
 * Compile and run
 
 ```vim
-" Default is '<leader>w'
+" Default is '<leader>b'
 " Example:
 let g:execute_keybind = '<F5>'
 ```

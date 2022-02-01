@@ -11,7 +11,7 @@ if !exists('g:input_keybind')
   let g:input_keybind = '<leader>e'
 endif
 if !exists('g:execute_keybind')
-  let g:execute_keybind = '<leader>w'
+  let g:execute_keybind = '<leader>b'
 endif
 
 " Clear terminal or not
