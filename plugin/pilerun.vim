@@ -90,7 +90,7 @@ else
   let b:c_input = ''
 endif
 
-let b:c_run = './%:r'
+let b:c_run = '/%:p:h/%:p:t:r'
 
 autocmd FileType c execute 'call CExecute(g:execute_keybind, s:clear)'
 
@@ -123,7 +123,7 @@ else
   let b:cpp_input = ''
 endif
 
-let b:cpp_run = './%:r'
+let b:cpp_run = '/%:p:h/%:p:t:r'
 
 autocmd FileType cpp execute 'call CppExecute(g:execute_keybind, s:clear)'
 
