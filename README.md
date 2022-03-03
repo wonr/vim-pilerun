@@ -147,7 +147,7 @@ By default, C is set to ```C11``` and C++ is set to ```C++20```. But if you want
 * C
 
 ```vim
-" Default is `-std=c11`
+" Default is '-std=c11'
 " You can change 'XX' part of '-std=cXX' to what you want.
 " Example:
 let g:c_version = '-std=c99'
@@ -156,7 +156,7 @@ let g:c_version = '-std=c99'
 * C++
 
 ```vim
-" Default is `-std=c++20`
+" Default is '-std=c++20'
 " You can change 'XX' part of '-std=c++XX' to what you want.
 " Example:
 let g:cpp_version = '-std=c++17'
@@ -172,7 +172,7 @@ Language-version flag is already added to the ```g:cpp_version```(or ```g:c_vers
 * C
 
 ```vim
-" Default is `-g -O2 -Wall`
+" Default is '-g -O2 -Wall'
 " Example:
 let g:c_flag = '-O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wcast-qual -Wcast-align'
 ```
@@ -180,7 +180,7 @@ let g:c_flag = '-O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -W
 * C++
 
 ```vim
-" Default is `-g -O2 -Wall`
+" Default is '-g -O2 -Wall'
 " Example:
 let g:cpp_flag = '-O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wcast-qual -Wcast-align'
 ```
